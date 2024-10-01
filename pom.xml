@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Definir el modelo básico del proyecto -->
+    <groupId>com.tools</groupId> <!-- Cambia esto según tu dominio -->
+    <artifactId>screenCaptureApp</artifactId> <!-- Nombre de la aplicación -->
+    <version>1.0</version>
+
+    
+    <!-- Configurar propiedades de Java -->
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source> <!-- Versión de Java (Java 8) -->
+        <maven.compiler.target>1.8</maven.compiler.target> <!-- Asegúrate de usar Java 8 o superior -->
+        <maven.junit.version>5.7.0</maven.junit.version>
+    </properties>
+
+    <!-- Definir dependencias -->
+    <!-- Definir dependencias -->
+    <dependencies>
+        <!-- JUnit 5 para pruebas unitarias -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${maven.junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${maven.junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Configuración para crear un archivo JAR ejecutable -->
+    <build>
+        <plugins>
+            <!-- Plugin para compilar y empaquetar el proyecto en un JAR ejecutable -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+          <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>com.tools.ScreenCaptureApp</mainClass>
+                    </manifest>
+                </archive>
+    </configuration>
+          
+            </plugin>
+
+            <!-- Plugin para empaquetar en un JAR ejecutable con dependencias -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>ScreenCaptureApp</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- id del proceso de construcción -->
+                        <phase>package</phase> <!-- empaquetar durante la fase de package -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
